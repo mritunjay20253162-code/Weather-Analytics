@@ -8,8 +8,9 @@ try {
   console.warn('DNS server override failed, using system resolver:', dnsErr.message);
 }
 
+
 const connectDB = async () => {
-  try {
+  try{
     const mongoURI = process.env.MONGODB_URI;
     const isConfigured = Boolean(mongoURI && !mongoURI.includes('<db_password>'));
     console.log(`MongoDB URI configured: ${isConfigured}`);
@@ -37,5 +38,7 @@ const connectDB = async () => {
     throw error;
   }
 };
+
+
 
 export default connectDB;
