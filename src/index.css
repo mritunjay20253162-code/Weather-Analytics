@@ -3,10 +3,241 @@
 @tailwind utilities;
 
 @layer base {
+  :root, html.dark {
+    --color-slate-50: 248 250 252;
+    --color-slate-100: 241 245 249;
+    --color-slate-200: 226 232 240;
+    --color-slate-300: 203 213 225;
+    --color-slate-400: 148 163 184;
+    --color-slate-500: 100 116 139;
+    --color-slate-600: 71 85 105;
+    --color-slate-700: 51 65 85;
+    --color-slate-800: 30 41 59;
+    --color-slate-900: 15 23 42;
+    --color-slate-950: 2 6 23;
+    color-scheme: dark;
+  }
+
+  html.light {
+    --color-slate-50: 0 0 0;
+    --color-slate-100: 0 0 0;          /* #000000 */
+    --color-slate-200: 0 0 0;          /* #000000 */
+    --color-slate-300: 0 0 0;          /* #000000 */
+    --color-slate-400: 0 0 0;          /* #000000 */
+    --color-slate-500: 0 0 0;          /* #000000 */
+    --color-slate-600: 0 0 0;          /* #000000 */
+    --color-slate-700: 226 232 240;     /* border-slate-700 -> light border #e2e8f0 */
+    --color-slate-800: 248 250 252;     /* bg-slate-800 -> soft inner card bg #f8fafc */
+    --color-slate-900: 255 255 255;     /* bg-slate-900 -> crisp white card bg #ffffff */
+    --color-slate-950: 241 245 249;     /* bg-slate-950 -> elegant grey scaffold #f1f5f9 */
+    color-scheme: light;
+  }
+
   body {
     margin: 0;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: rgb(var(--color-slate-950));
+    color: rgb(var(--color-slate-100));
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+}
+
+/* -------------------------------------------------------------
+   Light Theme UI System — Black Font Overrides & Mapbox Overrides
+   ------------------------------------------------------------- */
+html.light {
+  body {
+    background-color: #f1f5f9 !important;
+    color: #000000 !important;
+  }
+
+  /* Top Banner / Welcome Section in Light Mode */
+  section.bg-gradient-to-b,
+  .bg-gradient-to-b.from-slate-900,
+  .bg-gradient-to-b.from-amber-500\/10 {
+    background: linear-gradient(to bottom, #e2e8f0 0%, #f1f5f9 100%) !important;
+    border-bottom-color: #cbd5e1 !important;
+  }
+
+  /* Headings & Text Hierarchy */
+  h1, h2, h3, h4, h5, h6, p, label, span, th, td, div {
+    color: #000000;
+  }
+
+  /* Force all slate text classes to black in Light Mode */
+  .text-slate-100,
+  .text-slate-200,
+  .text-slate-300,
+  .text-slate-400,
+  .text-slate-500,
+  .text-slate-600 {
+    color: #000000 !important;
+  }
+
+  /* In light mode, headings and labels with text-white on page/cards become black text */
+  .text-white:not(button *):not(button):not(a.bg-gradient-to-r *):not(a.bg-gradient-to-r):not(a.bg-gradient-to-tr *):not(a.bg-gradient-to-tr):not(.bg-gradient-to-r *):not(.bg-gradient-to-r):not(.bg-gradient-to-tr *):not(.bg-gradient-to-tr):not([class*="bg-sky-"]):not([class*="bg-blue-"]):not([class*="bg-emerald-"]):not([class*="bg-amber-"]):not([class*="bg-rose-"]):not([class*="bg-teal-"]) {
+    color: #000000 !important;
+  }
+
+  /* Background Scaffold */
+  .bg-slate-950 {
+    background-color: #f1f5f9 !important;
+  }
+
+  /* Cards, Containers, Observation Feed items, Dropdowns & List Items */
+  .bg-slate-900\/70,
+  .bg-slate-900\/80,
+  .bg-slate-900\/90,
+  .bg-slate-900\/95,
+  .bg-slate-900,
+  .bg-slate-950\/40,
+  .bg-slate-950\/50,
+  .bg-slate-950\/60,
+  .bg-slate-950\/70,
+  .bg-slate-950\/80,
+  .bg-slate-950\/90 {
+    background-color: #ffffff !important;
+    border-color: #cbd5e1 !important;
+    box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.05), 0 1px 2px -1px rgba(15, 23, 42, 0.03) !important;
+  }
+
+  /* Inner Card Sections, Inputs, Sub-containers */
+  .bg-slate-800\/40,
+  .bg-slate-800\/60,
+  .bg-slate-800\/80,
+  .bg-slate-800 {
+    background-color: #f8fafc !important;
+    border-color: #cbd5e1 !important;
+  }
+
+  /* Hover States for light elements */
+  .hover\:bg-slate-800\/60:hover,
+  .hover\:bg-slate-800:hover {
+    background-color: #e2e8f0 !important;
+  }
+
+  .hover\:bg-slate-700:hover {
+    background-color: #cbd5e1 !important;
+  }
+
+  /* Borders */
+  .border-slate-800\/80,
+  .border-slate-800,
+  .border-slate-700\/50,
+  .border-slate-700\/60,
+  .border-slate-700\/80,
+  .border-slate-700 {
+    border-color: #cbd5e1 !important;
+  }
+
+  /* Input fields & Select elements */
+  input, select, textarea {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border-color: #cbd5e1 !important;
+  }
+  input::placeholder, textarea::placeholder {
+    color: #64748b !important;
+  }
+
+  /* Accent & Badge colors for Light Mode */
+  .text-emerald-400 { color: #059669 !important; }
+  .text-sky-400 { color: #0284c7 !important; }
+  .text-amber-400 { color: #d97706 !important; }
+  .text-rose-400, .text-rose-300 { color: #e11d48 !important; }
+
+  .bg-emerald-500\/10 { background-color: #ecfdf5 !important; border-color: #a7f3d0 !important; }
+  .bg-sky-500\/10 { background-color: #f0f9ff !important; border-color: #bae6fd !important; }
+  .bg-amber-500\/10 { background-color: #fffbeb !important; border-color: #fde68a !important; }
+  .bg-rose-500\/10 { background-color: #fff1f2 !important; border-color: #fecdd3 !important; }
+
+  /* Buttons & Action Badges styling in light mode */
+  .bg-slate-800.text-slate-200,
+  a.bg-slate-800 {
+    background-color: #f1f5f9 !important;
+    color: #000000 !important;
+    border-color: #cbd5e1 !important;
+  }
+  .bg-slate-800.text-slate-200:hover,
+  a.bg-slate-800:hover {
+    background-color: #e2e8f0 !important;
+    color: #000000 !important;
+  }
+
+  /* Primary Gradient Buttons remain vibrant white text */
+  .bg-gradient-to-r,
+  .bg-gradient-to-tr,
+  .bg-gradient-to-r *,
+  .bg-gradient-to-tr * {
+    color: #ffffff !important;
+  }
+
+  /* Active Navigation Links */
+  .bg-sky-500\/15 {
+    background-color: #e0f2fe !important;
+    color: #0369a1 !important;
+    border-color: #bae6fd !important;
+  }
+
+  .bg-emerald-500\/15 {
+    background-color: #d1fae5 !important;
+    color: #047857 !important;
+    border-color: #a7f3d0 !important;
+  }
+
+  .bg-amber-500\/15 {
+    background-color: #fef3c7 !important;
+    color: #b45309 !important;
+    border-color: #fde68a !important;
+  }
+
+  /* Mapbox Map & Controls in Light Mode */
+  .mapboxgl-map {
+    background-color: #ffffff !important;
+  }
+
+  .mapboxgl-ctrl-group {
+    background-color: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: 0 1px 4px 0 rgba(15, 23, 42, 0.1) !important;
+  }
+
+  .mapboxgl-ctrl-group button {
+    border-bottom: 1px solid #e2e8f0 !important;
+  }
+
+  .mapboxgl-ctrl-icon {
+    filter: invert(1) brightness(0.2) !important;
+  }
+
+  .mapboxgl-ctrl-attrib {
+    background-color: rgba(255, 255, 255, 0.85) !important;
+    color: #4b5563 !important;
+  }
+
+  .mapboxgl-ctrl-attrib a {
+    color: #374151 !important;
+  }
+
+  option {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  /* Recharts Tooltips in Light Mode */
+  .recharts-default-tooltip {
+    background-color: #ffffff !important;
+    border-color: #cbd5e1 !important;
+    color: #000000 !important;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  /* Map controls & overlays */
+  .mapboxgl-popup-content {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1) !important;
   }
 }

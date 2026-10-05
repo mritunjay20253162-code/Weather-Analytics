@@ -11,9 +11,12 @@ import {
   LayoutDashboard,
   Compass,
   LogIn,
-  ShieldCheck
+  ShieldCheck,
+  Sun,
+  Moon
 } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
+import { useTheme } from '../context/ThemeContext'
 
 /**
  * Reusable Navbar for National Weather Big Data Analytics Platform.
@@ -21,6 +24,7 @@ import { useAuth } from '../context/AuthContext'
  */
 export default function Navbar() {
   const { currentUser, isGuest, logout, exitGuestMode } = useAuth()
+  const { theme, toggleTheme } = useTheme()
   const navigate = useNavigate()
   const location = useLocation()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -213,10 +217,36 @@ export default function Navbar() {
                 </Link>
               </>
             )}
+
+            {/* Light / Dark Mode Toggle Button */}
+            <button
+              onClick={toggleTheme}
+              className="ml-2 p-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors focus:outline-none flex items-center justify-center border border-slate-700/50 bg-slate-900/50 cursor-pointer"
+              title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+              aria-label="Toggle theme mode"
+            >
+              {theme === 'dark' ? (
+                <Sun className="w-4.5 h-4.5 text-amber-400" />
+              ) : (
+                <Moon className="w-4.5 h-4.5 text-sky-400" />
+              )}
+            </button>
           </nav>
 
-          {/* Mobile Menu Toggle Button */}
+          {/* Mobile Menu & Theme Toggle Buttons */}
           <div className="flex md:hidden items-center gap-2">
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 focus:outline-none border border-slate-700/50 cursor-pointer"
+              title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+              aria-label="Toggle theme mode"
+            >
+              {theme === 'dark' ? (
+                <Sun className="w-5 h-5 text-amber-400" />
+              ) : (
+                <Moon className="w-5 h-5 text-sky-400" />
+              )}
+            </button>
             {currentUser ? (
               <div className="w-7 h-7 rounded-full overflow-hidden border border-sky-500/40">
                 {currentUser.photoURL ? (

@@ -3,6 +3,7 @@ import mapboxgl from 'mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import { Filter, Layers, MapPin, RefreshCw, AlertCircle, AlertTriangle, Key, ExternalLink } from 'lucide-react'
 import { API_BASE_URL, safeFetchJson } from '../config/api'
+import { useTheme } from '../context/ThemeContext'
 
 // Read Mapbox public token from Vite environment (starts with pk.eyJ...)
 const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN
@@ -89,6 +90,7 @@ function reportsToGeoJSON(reports) {
  * Features GeoJSON clustering, event-color markers, interactive popups, and multi-parameter filters.
  */
 export default function WeatherMap({ height = '520px' }) {
+  const { theme } = useTheme()
   const mapContainerRef = useRef(null)
   const mapRef = useRef(null)
   const popupRef = useRef(null)
@@ -166,15 +168,25 @@ export default function WeatherMap({ height = '520px' }) {
     filteredReportsRef.current = filteredReports
   }, [filteredReports])
 
+  // Switch map style dynamically when theme changes
+  useEffect(() => {
+    if (mapRef.current) {
+      const targetStyle = theme === 'light' ? 'mapbox://styles/mapbox/light-v11' : 'mapbox://styles/mapbox/dark-v11'
+      mapRef.current.setStyle(targetStyle)
+    }
+  }, [theme])
+
   // Initialize Mapbox GL instance if token is configured
   useEffect(() => {
     if (!hasValidToken || !mapContainerRef.current) return
 
     mapboxgl.accessToken = MAPBOX_TOKEN.trim()
 
+    const initialStyle = theme === 'light' ? 'mapbox://styles/mapbox/light-v11' : 'mapbox://styles/mapbox/dark-v11'
+
     const map = new mapboxgl.Map({
       container: mapContainerRef.current,
-      style: 'mapbox://styles/mapbox/dark-v11',
+      style: initialStyle,
       center: [78.9629, 22.5937], // Centered on India [longitude, latitude]
       zoom: 4.5,
       minZoom: 3.5,
