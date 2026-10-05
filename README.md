@@ -117,7 +117,6 @@ Weather-Analytics/
 The platform includes **Astra AI**, a floating weather assistant powered by Google Gemini.
 
 - **Capabilities**: Explains satellite telemetry, answers climate queries, provides severe weather safety steps, and assists users with platform navigation.
-- **API Key**: Configured via `VITE_GEMINI_API_KEY` in `.env`.
 - **Obtain a key**: Get a free API key at [Google AI Studio](https://aistudio.google.com/app/apikey).
 
 ---
