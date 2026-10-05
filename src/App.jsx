@@ -16,6 +16,7 @@ import UserDashboard from './pages/UserDashboard'
 import AdminDashboard from './pages/AdminDashboard'
 import ProtectedRoute from './routes/ProtectedRoute'
 import AdminRoute from './routes/AdminRoute'
+import GeminiChatbot from './components/GeminiChatbot'
 
 /**
  * Landing Page Component (Route: /)
@@ -186,6 +187,9 @@ export default function App() {
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </div>
+
+        {/* Gemini AI Floating Weather Assistant */}
+        <GeminiChatbot />
       </div>
     </AuthProvider>
   )
